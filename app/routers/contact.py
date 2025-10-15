@@ -15,12 +15,19 @@ BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 
-# ===== Contact Form (GET) =====
+def load_projects():
+    """projects.json 파일을 읽어 반환하는 함수"""
+    projects_path = BASE_DIR.parent / "projects.json"
+    try:
+        with open(projects_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return []  # 혹은 빈 리스트 반환하여 템플릿 에러 방지
+
+
 @router.get("/contact", response_class=HTMLResponse)
 async def contact_form(request: Request):
-    with open(BASE_DIR.parent / "projects.json", "r", encoding="utf-8") as f:
-        projects = json.load(f)
-
+    projects = load_projects()
     return templates.TemplateResponse(
         "contact.html",
         {
@@ -31,7 +38,6 @@ async def contact_form(request: Request):
     )
 
 
-# ===== Contact Form (POST - 메일 전송) =====
 @router.post("/contact", response_class=HTMLResponse)
 async def send_mail(
     request: Request,
@@ -40,15 +46,15 @@ async def send_mail(
     subject: str = Form("문의"),
     message: str = Form(...),
 ):
+    projects = load_projects()
+
     try:
-        # 메일 내용 작성
         body = f"보낸 사람: {name} ({email})\n\n{message}"
         msg = MIMEText(body, _charset="utf-8")
         msg["Subject"] = subject
         msg["From"] = settings.EMAIL_USER
         msg["To"] = settings.EMAIL_USER
 
-        # SMTP 연결 및 메일 전송
         with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
             server.starttls()
             server.login(settings.EMAIL_USER, settings.EMAIL_PASS)
@@ -56,9 +62,15 @@ async def send_mail(
 
         result = "메일이 성공적으로 전송되었습니다."
     except Exception as e:
-        result = f"메일 전송 실패 : {str(e)}"
+        # 실제 운영환경에선 logging 추가 권장
+        result = "메일 전송에 실패했습니다. 잠시 후 다시 시도해주세요."
 
-    # 다시 contact.html 렌더링 (알림 메시지 표시)
     return templates.TemplateResponse(
-        "contact.html", {"request": request, "projects": [], "result": result}
+        "contact.html",
+        {
+            "request": request,
+            "projects": projects,
+            "contact_email": settings.CONTACT_EMAIL,
+            "result": result,
+        },
     )

@@ -9,11 +9,15 @@ router = APIRouter()
 BASE_DIR = pathlib.Path(__file__).resolve().parent.parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
+def load_projects_json():
+    try:
+        with open(BASE_DIR.parent / "projects.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"[ERROR] projects.json 로딩 실패: {e}")
+        return []
 
 @router.get("/projects", response_class=HTMLResponse)
 async def projects(request: Request):
-    with open(BASE_DIR.parent / "projects.json", "r", encoding="utf-8") as f:
-        projects = json.load(f)
-    return templates.TemplateResponse(
-        "projects.html", {"request": request, "projects": projects}
-    )
+    projects = load_projects_json()
+    return templates.TemplateResponse("projects.html", {"request": request, "projects": projects})

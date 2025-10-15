@@ -4,126 +4,87 @@
 
 {% block content %}
 <style>
-  .card-img-top {
-    width: 100%;
-    height: 300px;
-    object-fit: contain; /* fit image without cropping */
-    background-color: #f8f9fa; /* fill empty space */
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-  }
-  .subproject-img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    background-color: #f8f9fa;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    margin: 0 8px;
-    transition: transform 0.3s ease;
-  }
-  .subproject-img:hover {
-    transform: scale(1.05);
-  }
-  #projectsRow {
+  .carousel-inner {
     display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow-x: auto;
+    scroll-behavior: smooth;
   }
-  .subproject-card {
-    cursor: pointer;
+
+  .carousel-item {
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+    padding: 0 10px;
+    box-sizing: border-box;
   }
-  .subproject-wrapper {
-    border: 1px solid #dee2e6;
-    border-top: 2px solid #0d6efd;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 0.25rem;
+
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
   }
-  .carousel-control-prev,
-  .carousel-control-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 5%;
-  }
-  .carousel-control-prev {
-    left: 220px; /* adjust to be fully inside sidebar */
-  }
-  .connector-line {
-    width: 2px;
-    background-color: #0d6efd;
-    margin: 0 auto;
-    height: 30px;
+
+  @media (max-width: 768px) {
+    .carousel-item {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
   }
 </style>
+
 <div class="container">
-  <h2 class="text-center mb-5">All Projects</h2>
-  <div id="projectsCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="row" id="projectsRow">
-          {% for main_project in projects %}
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-              <img src="{{ main_project.image }}" class="card-img-top" alt="{{ main_project.title }}">
-              <div class="card-body">
-                <h3 class="card-title">{{ main_project.title }}</h3>
-                <p class="card-text">{{ main_project["desc"] }}</p>
-              </div>
-            </div>
-            <div class="connector-line"></div>
-            <div class="subproject-wrapper">
-              <div class="d-flex justify-content-center">
-                {% for key in ['mini1','mini2','mini3'] %}
-                  <img src="{{ main_project[key] or 'static/images/preparing.png' }}" class="subproject-img" alt="{{ key }}" data-bs-toggle="modal" data-bs-target="#imageModal" onclick="document.getElementById('modalImage').src='{{ main_project[key] or 'static/images/preparing.png' }}'">
-                {% endfor %}
-              </div>
-            </div>
+  <h2 class="text-center mb-4">All Projects</h2>
+
+  <div class="position-relative">
+    <!-- Carousel Buttons -->
+    <button class="btn btn-outline-secondary position-absolute top-50 start-0 translate-middle-y z-3"
+            id="prevBtn" style="z-index: 10;">
+      <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <div class="carousel-inner px-5" id="carouselInner">
+      {% for project in projects %}
+      <div class="carousel-item">
+        <div class="card mb-4 shadow-sm">
+          <img src="{{ project.image }}" class="card-img-top" alt="{{ project.title }}">
+          <div class="card-body">
+            <h5 class="card-title">{{ project.title }}</h5>
+            <p class="card-text">{{ project.desc }}</p>
           </div>
-          {% endfor %}
         </div>
       </div>
+      {% endfor %}
     </div>
+
+    <button class="btn btn-outline-secondary position-absolute top-50 end-0 translate-middle-y z-3"
+            id="nextBtn" style="z-index: 10;">
+      <i class="bi bi-chevron-right"></i>
+    </button>
   </div>
 </div>
-<button class="carousel-control-prev" type="button" data-bs-target="#projectsCarousel" data-bs-slide="prev">
-  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-  <span class="visually-hidden">Previous</span>
-</button>
-<button class="carousel-control-next" type="button" data-bs-target="#projectsCarousel" data-bs-slide="next">
-  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-  <span class="visually-hidden">Next</span>
-</button>
 
+<!-- 모달 -->
 <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content">
       <div class="modal-body">
-        <img id="modalImage" src="" class="img-fluid" alt="원본 이미지">
+        <img id="modalImage" src="" class="img-fluid" alt="프로젝트 이미지">
       </div>
     </div>
   </div>
 </div>
+
 <script>
-  const row = document.querySelector('#projectsRow');
-  function slideLeft() {
-    row.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
-    row.style.transform = 'translateX(-33.33%)';
-    setTimeout(() => {
-      row.append(row.firstElementChild);
-      row.style.transition = 'none';
-      row.style.transform = 'translateX(0)';
-    }, 600);
-  }
-  function slideRight() {
-    row.insertBefore(row.lastElementChild, row.firstElementChild);
-    row.style.transition = 'none';
-    row.style.transform = 'translateX(-33.33%)';
-    setTimeout(() => {
-      row.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1)';
-      row.style.transform = 'translateX(0)';
-    });
-  }
-  document.querySelector('.carousel-control-prev').addEventListener('click', slideLeft);
-  document.querySelector('.carousel-control-next').addEventListener('click', slideRight);
+  const carouselInner = document.getElementById('carouselInner');
+  const nextBtn = document.getElementById('nextBtn');
+  const prevBtn = document.getElementById('prevBtn');
+
+  nextBtn.addEventListener('click', () => {
+    const cardWidth = carouselInner.querySelector('.carousel-item').offsetWidth;
+    carouselInner.scrollBy({ left: cardWidth, behavior: 'smooth' });
+  });
+
+  prevBtn.addEventListener('click', () => {
+    const cardWidth = carouselInner.querySelector('.carousel-item').offsetWidth;
+    carouselInner.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+  });
 </script>
 {% endblock %}

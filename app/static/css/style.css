@@ -7,10 +7,11 @@
   --sidebar-active: #006064;
   --hero-gradient: linear-gradient(135deg, #81d4fa, #aed581);
   --card-bg: #ffffff;
+  --card-text-color: #222;
 }
 
-/* 🌙 Dark Theme */
 body.dark-mode {
+  /* 🌙 Dark Theme */
   --bg-color: #1e1e1e;
   --text-color: #e0e0e0;
   --sidebar-bg: #004d5a;
@@ -18,9 +19,9 @@ body.dark-mode {
   --sidebar-active: #007b8a;
   --hero-gradient: linear-gradient(135deg, #263238, #37474f);
   --card-bg: #2a2a2a;
+  --card-text-color: #f5f5f5;
 }
 
-/* 공통 스타일 */
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -53,7 +54,6 @@ body {
   font-weight: bold;
 }
 
-/* 네비게이션 링크 */
 .nav-link {
   color: #e8f5e9 !important;
   margin: 5px 0;
@@ -70,13 +70,11 @@ body {
   background-color: var(--sidebar-active);
 }
 
-/* 본문 */
 .content {
   flex: 1;
   padding: 40px;
 }
 
-/* 히어로 섹션 */
 .hero {
   background: var(--hero-gradient);
   color: white;
@@ -96,10 +94,15 @@ body {
   font-weight: bold;
 }
 
-/* 카드 */
+/* 카드 스타일 */
 .card {
   background: var(--card-bg);
-  transition: background 0.4s ease;
+  color: var(--card-text-color);
+  transition: background 0.4s ease, color 0.4s ease;
+}
+.card-title,
+.card-text {
+  color: var(--card-text-color);
 }
 
 .card-img-top {
@@ -110,7 +113,6 @@ body {
   border-top-right-radius: 0.5rem;
 }
 
-/* 캐러셀 아이콘 반전 */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1) grayscale(100);
@@ -127,7 +129,6 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
 }
-
 .theme-toggle:hover {
   background: white;
   color: var(--sidebar-bg);

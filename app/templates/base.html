@@ -6,47 +6,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/static/css/style.css">
-  <style>
-    /* 🌙 다크모드 스타일 */
-    body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
-    body.dark-mode .sidebar {
-      background: #333;
-      color: #fff;
-    }
-    body.dark-mode .nav-link {
-      color: #ccc !important;
-    }
-    body.dark-mode .nav-link:hover {
-      background-color: #555;
-      color: #fff !important;
-    }
-
-    /* 🌙 다크모드 토글 버튼 스타일 */
-    .theme-toggle {
-      background: #fff;
-      border: none;
-      border-radius: 20px;
-      padding: 8px 15px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 20px;
-    }
-    .theme-toggle:hover {
-      background: #f0f0f0;
-      transform: scale(1.05);
-    }
-    body.dark-mode .theme-toggle {
-      background: #444;
-      color: #fff;
-    }
-    body.dark-mode .theme-toggle:hover {
-      background: #666;
-    }
-  </style>
 </head>
 <body>
   <div class="sidebar">
@@ -57,7 +16,6 @@
       <a class="nav-link" href="/about">소개</a>
       <a class="nav-link" href="/contact">연락처</a>
     </nav>
-
     <!-- 🌙 다크모드 전환 버튼 -->
     <button class="theme-toggle" onclick="toggleTheme()">🌙 Dark</button>
   </div>
@@ -89,7 +47,6 @@
       }
     }
   </script>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
