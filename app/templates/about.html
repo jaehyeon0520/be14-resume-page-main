@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}About - JaeHyeon{% endblock %}
+
+{% block content %}
+<main class="container">
+  <!-- Language Toggle -->
+  <div class="text-end mb-3">
+    <button id="langToggle" class="btn btn-outline-primary btn-sm" onclick="toggleEnglish()">한국어로 보기</button>
+  </div>
+
+  <h2 class="text-center mb-5">About Me</h2>
+
+  <!-- Introduce -->
+  <section class="mb-5">
+    <div class="korean d-none">
+      <h3>소개</h3>
+      <p>
+        안녕하세요! 끊임없이 배우고 성장하는 개발자 <strong>방재현</strong>입니다.<br><br>
+        저는 문제를 해결하고, 더 나은 사용자 경험을 만들어내는 것에 큰 흥미를 가지고 있습니다.
+        새로운 기술을 배우는 것을 두려워하지 않으며, 이를 실제 프로젝트에 적용하여
+        효율적이고 안정적인 시스템을 구축하는 것을 목표로 합니다.<br><br>
+        단순히 코드를 작성하는 것에 그치지 않고, 왜 그렇게 작동하는지 이해하며,
+        기술을 통해 사람들의 삶을 편리하게 만드는 데 집중합니다.
+        앞으로도 끊임없는 도전과 협업을 통해 한층 성장한 개발자가 되겠습니다.
+      </p>
+    </div>
+
+    <div class="english">
+      <h3>Introduction</h3>
+      <p>
+        Hello! I'm <strong>JaeHyeon Bang</strong>, a developer who loves learning and improving every day.<br><br>
+        I’m passionate about solving problems and creating meaningful user experiences.
+        I’m not afraid to explore new technologies and strive to apply them effectively
+        to build efficient and reliable systems.<br><br>
+        Beyond writing code, I seek to understand how things work and use technology to make
+        people’s lives better. My goal is to keep growing through challenges and collaboration,
+        evolving into a more versatile and insightful developer.
+      </p>
+    </div>
+  </section>
+
+  <div class="border-top my-5"></div>
+
+  <!-- Skill -->
+  <section class="mb-5">
+    <div class="korean d-none">
+      <h3>기술 스택</h3>
+      <ul>
+        <li><strong>언어:</strong> Python, Java, C# - 다양한 프로그래밍 언어를 활용하여 유연하고 효율적인 코드를 작성합니다.</li>
+        <li><strong>백엔드 프레임워크:</strong> Django, FastAPI, Flask - 안정적이고 확장 가능한 서버 사이드 애플리케이션을 개발합니다.</li>
+        <li><strong>데이터베이스:</strong> MySQL, PostgreSQL, SQLite - 데이터 저장 및 관리를 위한 관계형 데이터베이스를 활용합니다.</li>
+        <li><strong>배포 및 클라우드:</strong> AWS, Vercel - 클라우드 환경에서의 서비스 배포와 운영 경험을 보유하고 있습니다.</li>
+        <li><strong>도구:</strong> Git (버전 관리), VSCode (개발 환경) - 효율적인 협업과 개발을 위한 필수 도구들을 능숙하게 다룹니다.</li>
+      </ul>
+      <p>
+        새로운 기술을 적극적으로 습득하고 프로젝트에 적용하여, 시스템의 안정성과 확장성을 고려한 최적의 아키텍처 설계를 추구합니다.
+        각 기술 스택에 대한 깊은 이해를 바탕으로 효율적인 개발과 유지보수를 실현합니다.
+      </p>
+    </div>
+    <div class="english">
+      <h3>Technical Skills</h3>
+      <ul>
+        <li><strong>Languages:</strong> Python, Java, C# - Proficient in multiple programming languages to write flexible and efficient code.</li>
+        <li><strong>Backend Frameworks:</strong> Django, FastAPI, Flask - Experienced in building robust and scalable server-side applications.</li>
+        <li><strong>Databases:</strong> MySQL, PostgreSQL, SQLite - Skilled in managing relational databases for reliable data storage and retrieval.</li>
+        <li><strong>Deployment & Cloud:</strong> AWS, Vercel - Knowledgeable in deploying and maintaining applications in cloud environments.</li>
+        <li><strong>Tools:</strong> Git (Version Control), VSCode (Development Environment) - Adept at using essential tools for efficient collaboration and development.</li>
+      </ul>
+      <p>
+        I actively acquire and integrate new technologies to maximize system stability and scalability, focusing on designing optimal architectures.
+        My thorough understanding of each technology stack enables efficient development and maintenance.
+      </p>
+    </div>
+  </section>
+
+  <div class="border-top my-5"></div>
+
+  <!-- Experience -->
+  <section class="mb-5">
+    <div class="korean d-none">
+      <h3>경력 및 주요 프로젝트</h3>
+      <ul>
+        <li>외주 프로젝트 수행: 클라이언트의 요구를 정확히 분석하고, 체계적인 기능 설계와 개발, 그리고 안정적인 시스템 배포까지 전 과정을 책임감 있게 수행했습니다.</li>
+        <li>자동 메일 발송 시스템 개발: 다양한 조건 기반 트리거를 구현하여 비즈니스 로직을 자동화하고 효율성을 극대화했습니다.</li>
+        <li>OZ코딩스쿨 백엔드 과정 수료 후 팀 프로젝트 참여: JWT 인증 시스템을 직접 설계하고, 마이페이지·공지사항·댓글 기능을 구현했습니다.</li>
+      </ul>
+    </div>
+
+    <div class="english">
+      <h3>Experience & Key Projects</h3>
+      <ul>
+        <li>Executed client projects with thorough requirement analysis, feature design, and stable system deployment.</li>
+        <li>Developed an automated email dispatch system with condition-based triggers, enhancing communication efficiency.</li>
+        <li>After completing the OZ Coding School backend course, led the design and implementation of a JWT-based authentication system.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="border-top my-5"></div>
+
+  <!-- Project Summary -->
+  <section>
+    <div class="korean d-none">
+      <h3>프로젝트 요약</h3>
+      <ul>
+        <li>JWT 기반 사용자 인증 시스템 개발</li>
+        <li>인지능력 테스트 결과 자동 생성 시스템 구축</li>
+        <li>팀 협업 및 일정 관리 최적화</li>
+        <li>사용자 피드백 기반 기능 개선 및 품질 향상</li>
+      </ul>
+    </div>
+
+    <div class="english">
+      <h3>Project Summary</h3>
+      <ul>
+        <li>Developed a JWT-based user authentication system focusing on security and scalability.</li>
+        <li>Built an automated cognitive test result generation system ensuring high reliability and speed.</li>
+        <li>Optimized collaboration and project management processes during development.</li>
+        <li>Improved service quality through continuous updates based on user feedback.</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<script>
+function toggleEnglish() {
+  document.querySelectorAll('.korean').forEach(el => el.classList.toggle('d-none'));
+  document.querySelectorAll('.english').forEach(el => el.classList.toggle('d-none'));
+  const btn = document.getElementById('langToggle');
+  btn.textContent = btn.textContent.includes('한국어') ? 'English' : '한국어로 보기';
+}
+</script>
+{% endblock %}
